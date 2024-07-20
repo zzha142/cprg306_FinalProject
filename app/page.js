@@ -4,6 +4,7 @@ export default function Home() {
   return (
     <main className="h-screen">
       <h1>Final Project Template</h1>
+      <p>Test</p>
     </main>
   );
 }
