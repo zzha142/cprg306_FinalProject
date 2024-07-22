@@ -16,6 +16,12 @@
   }
 }
 
+/* setting the global CSS to bg color & text color */
+main{
+  background-color: black;
+  color:white;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
