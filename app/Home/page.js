@@ -1,6 +1,7 @@
 "use client";
 
 import FreeGameItem from "../components/freeGame-item";
+import Login from "../components/login";
 import SearchBar from "../components/search-bar";
 
 //may use https://www.freetogame.com/api-doc to fetch a random game
@@ -18,6 +19,7 @@ export default function HomePage() {
     <main className="p-4">
       <header>
         <h1 className={titleStyle}>Welcome to Game Central !!</h1>
+        <Login />
       </header>
       <div className="flex items-center justify-center mb-4">
         <SearchBar />
