@@ -1,8 +1,9 @@
 "use client";
 
-import FreeGameItem from "../components/freegame-item";
+import FreeGameItem from "../components/freeGame-item";
 import SearchBar from "../components/search-bar";
 
+//may use https://www.freetogame.com/api-doc to fetch a random game
 export default function HomePage() {
   const gameObj = {
     id: 1,
