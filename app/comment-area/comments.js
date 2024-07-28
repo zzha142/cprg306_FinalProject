@@ -31,7 +31,7 @@ export default function Comments() {
   };
 
   return (
-    <main className="relative min-h-screen bg-black text-white p-4">
+    <main className="relative min-h-screen text-white p-4">
       <header className="text-xl font-semibold mb-4 text-left text-green-500">
         Comments
       </header>
