@@ -18,7 +18,7 @@
 
 /* setting the global CSS to bg color & text color */
 main{
-  background-color: black;
+  background-color:rgb(20, 20, 20);
   color:white;
 }
 

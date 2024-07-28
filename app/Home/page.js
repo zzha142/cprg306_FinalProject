@@ -1,17 +1,10 @@
 "use client";
 
 import FreeGameItem from "../components/freeGame-item";
+import RandomFreeGame from "../components/random-free-game";
 import SearchBar from "../components/search-bar";
 
-//may use https://www.freetogame.com/api-doc to fetch a random game
 export default function HomePage() {
-  const gameObj = {
-    id: 1,
-    name: "Awesome Free Game",
-    category: "Unknown-Testing Purposes",
-    description: "An exciting adventure game that you can play for free!",
-  };
-
   const titleStyle = "text-4xl font-bold text-center pt-20 pb-5";
 
   return (
@@ -23,7 +16,7 @@ export default function HomePage() {
         <SearchBar />
       </div>
       <div className="text-center pt-12 w-2/3 mx-auto">
-        <FreeGameItem key={gameObj.id} gameObj={gameObj} />
+        <RandomFreeGame />
       </div>
     </main>
   );
