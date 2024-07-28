@@ -44,7 +44,7 @@ export default function RandomFreeGame() {
   }
 
   useEffect(() => {
-    getFreeGame();
+    getFreeGame(); // Fetch the initial game when the component mounts
   }, []);
 
   return (

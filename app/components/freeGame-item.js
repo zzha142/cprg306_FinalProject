@@ -1,9 +1,13 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
 
 export default function FreeGameItem({ gameObj, onTryAnother }) {
+  //styling part for reference
+  let bottomStyle = "text-blue-500 hover:underline flex-1";
+  let displayBoxStyle = "p-4 border border-gray-200 rounded-md shadow-sm";
+  let headingStyle = "text-xl font-bold mb-2";
+  let imgStyle = "mx-auto w-100 h-100 object-contain mb-4";
+  let textStyle = "text-gray-500 mb-4";
+
   //define gameObj
   const {
     title = "Unknown Game",
@@ -17,16 +21,12 @@ export default function FreeGameItem({ gameObj, onTryAnother }) {
     thumbnail,
   } = gameObj || {};
 
-  const [key, setKey] = useState(0);
-
-  const reloadPage = () => {
-    setKey((prevKey) => prevKey + 1);
-  };
-
   return (
-    <div className="p-4 border border-gray-200 rounded-md shadow-sm">
-      <h2 className="text-xl font-bold mb-2">{title}</h2>
-      <div className="text-gray-500 mb-4 flex">
+    <div key={id} className={displayBoxStyle}>
+      <h2 className={headingStyle}>
+        Try a Free Game: <span className="text-yellow-400">{title}</span>
+      </h2>
+      <div className={`${textStyle} flex`}>
         <p className="flex-1">Genre: {genre}</p>
         <p className="flex-1">Developer:{developer}</p>
         <p className="flex-1">Platform: {platform}</p>
@@ -35,20 +35,17 @@ export default function FreeGameItem({ gameObj, onTryAnother }) {
       <img
         src={thumbnail}
         alt={title}
-        className="mx-auto w-100 h-100 object-contain mb-4"
+        className={imgStyle}
         onClick={() => {
           window.location.href = game_url;
         }}
       />
-      <p className="text-gray-700 mb-2">{short_description}</p>
+      <p className={textStyle}>{short_description}</p>
       <div className="flex">
-        <Link href={game_url} className="text-blue-500 hover:underline flex-1">
+        <Link href={game_url} className={bottomStyle}>
           Enjoy it now
         </Link>
-        <button
-          className="text-blue-500 hover:underline flex-1"
-          onClick={onTryAnother}
-        >
+        <button className={bottomStyle} onClick={onTryAnother}>
           Try another one!
         </button>
       </div>
