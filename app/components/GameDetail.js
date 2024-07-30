@@ -7,7 +7,7 @@ export default function GameDetail({ title }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   let lastRequestTime = 0;
-  const minTimeBetweenRequests = 1000; 
+  const minTimeBetweenRequests = 1000;
 
   async function fetchGameDetails() {
     try {
@@ -20,12 +20,15 @@ export default function GameDetail({ title }) {
       lastRequestTime = Date.now();
 
       const response = await fetch(
-        `https://free-to-play-games-database.p.rapidapi.com/api/games?title=${encodeURIComponent(title)}`,
+        `https://free-to-play-games-database.p.rapidapi.com/api/games?title=${encodeURIComponent(
+          title
+        )}`,
         {
           method: "GET",
           headers: {
             "X-RapidAPI-Host": "free-to-play-games-database.p.rapidapi.com",
-            "X-RapidAPI-Key": "723f44bbcemsh9725090c1fd79f9p1de329jsnb539f62e2387",
+            "X-RapidAPI-Key":
+              "723f44bbcemsh9725090c1fd79f9p1de329jsnb539f62e2387",
           },
         }
       );
@@ -33,7 +36,9 @@ export default function GameDetail({ title }) {
         throw new Error("Failed to fetch game details");
       }
       const data = await response.json();
-      const gameData = data.find(game => game.title.toLowerCase() === title.toLowerCase());
+      const gameData = data.find(
+        (game) => game.title.toLowerCase() === title.toLowerCase()
+      );
       if (!gameData) {
         throw new Error("Game not found");
       }
@@ -46,7 +51,7 @@ export default function GameDetail({ title }) {
         short_description: gameData.short_description,
         game_url: gameData.game_url,
         developer: gameData.developer,
-        release_date: gameData.release_date, 
+        release_date: gameData.release_date,
       });
       setLoading(false);
     } catch (error) {

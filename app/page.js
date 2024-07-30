@@ -14,14 +14,11 @@ export default function HomePage() {
         <h1 className={titleStyle}>Welcome to Game Central !!</h1>
         <Login />
       </header>
-      <Link href="/gameDetail" className="text-center">
-        For testing purpose: Just a link to gameDetail Page
-      </Link>
       <div className="flex items-center justify-center mb-4">
         <SearchBar />
       </div>
       <div className="text-center pt-12 w-2/3 mx-auto">
-        <RandomFreeGame />l
+        <RandomFreeGame />
       </div>
     </main>
   );

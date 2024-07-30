@@ -22,7 +22,7 @@ export default function Login() {
   }
 
   return (
-    <div className="absolute top-4 right-4">
+    <div className="absolute top-4 right-4 z-10">
       {user ? (
         <button
           onClick={handleSignOut}
