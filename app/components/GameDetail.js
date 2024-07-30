@@ -2,10 +2,12 @@
 import { useEffect, useState } from "react";
 import GameDetailItem from "./GameDetailItem";
 
-export default function GameDetail({ title }) {
+export default function GameDetail({ initialTitle }) {
+  const [title, setTitle] = useState(initialTitle);
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   let lastRequestTime = 0;
   const minTimeBetweenRequests = 1000;
 
@@ -72,9 +74,5 @@ export default function GameDetail({ title }) {
     return <p>Error: {error}</p>;
   }
 
-  return (
-    <div>
-      <GameDetailItem game={game} />
-    </div>
-  );
+  return <GameDetailItem game={game} />;
 }
