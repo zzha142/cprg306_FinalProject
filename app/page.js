@@ -1,19 +1,28 @@
 "use client";
 
-import Comments from "./comment-area/comments";
 import Link from "next/link";
-import GameDetail from "./components/GameDetail";
+import Login from "./components/login";
+import RandomFreeGame from "./components/random-free-game";
+import SearchBar from "./components/search-bar";
 
-// This page is used for testing purposes, feel free to render your components here
-export default function Home() {
-  const title = "hades"; // This is the title of the game user want to search for
+export default function HomePage() {
+  const titleStyle = "text-4xl font-bold text-center pt-20 pb-5";
 
   return (
-    <main>
-      <h1>Final Project Template</h1>
-      <Link href="/Home">Go to home page</Link>
-      <GameDetail title={title} /> 
-      <Comments />
+    <main className="p-4">
+      <header>
+        <h1 className={titleStyle}>Welcome to Game Central !!</h1>
+        <Login />
+      </header>
+      <Link href="/gameDetail" className="text-center">
+        For testing purpose: Just a link to gameDetail Page
+      </Link>
+      <div className="flex items-center justify-center mb-4">
+        <SearchBar />
+      </div>
+      <div className="text-center pt-12 w-2/3 mx-auto">
+        <RandomFreeGame />l
+      </div>
     </main>
   );
 }

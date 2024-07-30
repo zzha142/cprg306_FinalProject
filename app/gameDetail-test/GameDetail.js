@@ -7,6 +7,7 @@ export default function GameDetail({ title }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  //try steam api
   useEffect(() => {
     const fetchGameDetails = async () => {
       try {
