@@ -1,41 +1,61 @@
 "use client";
-
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import GameDetailItem from "./GameDetailItem";
 
 export default function GameDetail({ title }) {
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  let lastRequestTime = 0;
+  const minTimeBetweenRequests = 1000; 
+
+  async function fetchGameDetails() {
+    try {
+      const now = Date.now();
+      if (now - lastRequestTime < minTimeBetweenRequests) {
+        await new Promise((resolve) =>
+          setTimeout(resolve, minTimeBetweenRequests - (now - lastRequestTime))
+        );
+      }
+      lastRequestTime = Date.now();
+
+      const response = await fetch(
+        `https://free-to-play-games-database.p.rapidapi.com/api/games?title=${encodeURIComponent(title)}`,
+        {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Host": "free-to-play-games-database.p.rapidapi.com",
+            "X-RapidAPI-Key": "723f44bbcemsh9725090c1fd79f9p1de329jsnb539f62e2387",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch game details");
+      }
+      const data = await response.json();
+      const gameData = data.find(game => game.title.toLowerCase() === title.toLowerCase());
+      if (!gameData) {
+        throw new Error("Game not found");
+      }
+
+      setGame({
+        name: gameData.title,
+        image: gameData.thumbnail,
+        genre: gameData.genre,
+        platform: gameData.platform,
+        short_description: gameData.short_description,
+        game_url: gameData.game_url,
+        developer: gameData.developer,
+        release_date: gameData.release_date, 
+      });
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
-    const fetchGameDetails = async () => {
-      try {
-        const response = await fetch(
-          `https://www.cheapshark.com/api/1.0/games?title=${encodeURIComponent(
-            title
-          )}`
-        );
-        const data = await response.json();
-        console.log(data);
-
-        if (data.length === 0) {
-          throw new Error("Game not found");
-        }
-
-        const gameData = data[0];
-
-        setGame({
-          name: gameData.external,
-          image: gameData.thumb,
-          cheapest: gameData.cheapest,
-        });
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
-
     fetchGameDetails();
   }, [title]);
 
@@ -48,18 +68,8 @@ export default function GameDetail({ title }) {
   }
 
   return (
-    <div className="p-4 border border-gray-200 rounded-md shadow-sm mx-auto w-96 bg-gray-800">
-      <h2 className="text-2xl font-bold mb-4 text-center">{game.name}</h2>
-      {game.image && (
-        <img
-          src={game.image}
-          alt={game.name}
-          className="mx-auto mb-4 w-64 h-64 object-contain"
-        />
-      )}
-      <p className="text-gray-700 mb-2 text-center">
-        Cheapest price: ${game.cheapest}
-      </p>
+    <div>
+      <GameDetailItem game={game} />
     </div>
   );
 }

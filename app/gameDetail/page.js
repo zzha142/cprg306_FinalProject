@@ -5,7 +5,7 @@ import Link from "next/link";
 import GameDetail from "../components/GameDetail";
 
 export default function GameDetailPage() {
-  const title = "hades"; // This is the title of the game user want to search for
+  const title = "Rumble Fighter"; // This is the title of the game user want to search for
 
   return (
     <main>
