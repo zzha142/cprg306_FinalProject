@@ -15,9 +15,11 @@ export default function Comments() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newComment.trim() !== "") {
+      const emailUsername = user?.email ? user.email.split('@')[0] : "Anonymous";
       const comment = {
         text: newComment,
         avatar: user?.photoURL || "https://via.placeholder.com/40",
+        emailUsername, 
       };
       setComments([comment, ...comments]);
       setNewComment("");
@@ -46,7 +48,10 @@ export default function Comments() {
               alt="User Avatar"
               className="w-10 h-10 rounded-full"
             />
-            <div>{comment.text}</div>
+            <div>
+              <div className="font-bold">{comment.emailUsername}</div>
+              <div>{comment.text}</div>
+            </div>
           </div>
         ))}
       </div>
