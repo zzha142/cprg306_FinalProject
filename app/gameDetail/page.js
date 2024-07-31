@@ -25,7 +25,7 @@ export default function GameDetailPage() {
         <Login />
       </header>
       <GameDetail initialTitle={title} />
-      <Comments />
+      <Comments currentGameTitle={title} />
     </main>
   );
 }

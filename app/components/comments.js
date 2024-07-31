@@ -1,28 +1,65 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserAuth } from "../login/_utils/auth-context";
+import { collection, query, where } from "firebase/firestore";
+import { addReviews, getReviews } from "../login/_services/comments-service";
+import { db } from "../login/_utils/firebase";
 
-export default function Comments() {
+export default function Comments({ currentGameTitle }) {
   const { user } = useUserAuth();
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+
+  async function loadReviews() {
+    console.log("loadReviews called", { user, currentGameTitle }); //testing purpose
+    if (user) {
+      try {
+        const q = query(
+          collection(db, "reviews"),
+          where("gametitle", "==", currentGameTitle)
+        );
+        const reviews = await getReviews(q);
+        console.log("Loaded reviews:", reviews); //Testing
+        console.log("currentGameTitle:", currentGameTitle); //Testing
+        console.log("user:", user); //Testing
+        setComments(reviews);
+      } catch (error) {
+        console.error("Error loading reviews:", error);
+      }
+    }
+  }
+
+  useEffect(() => {
+    loadReviews();
+  }, [currentGameTitle, user]);
 
   const handleInputChange = (e) => {
     setNewComment(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (newComment.trim() !== "") {
-      const emailUsername = user?.email ? user.email.split('@')[0] : "Anonymous";
+      const emailUsername = user?.email
+        ? user.email.split("@")[0]
+        : "Anonymous";
       const comment = {
         text: newComment,
         avatar: user?.photoURL || "https://via.placeholder.com/40",
-        emailUsername, 
+        emailUsername,
+        uid: user.uid,
+        gametitle: currentGameTitle,
+        timestamp: new Date(),
       };
-      setComments([comment, ...comments]);
-      setNewComment("");
+
+      try {
+        await addReviews(user.uid, currentGameTitle, comment);
+        setComments([comment, ...comments]);
+        setNewComment("");
+      } catch (error) {
+        console.error("Error adding comment:", error);
+      }
     }
   };
 
