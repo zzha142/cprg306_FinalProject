@@ -13,12 +13,14 @@ const Modal = ({ show, onClose }) => {
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-800 bg-opacity-75">
       <div className="bg-white p-4 rounded-md shadow-md text-black">
         <h2 className="text-xl font-semibold mb-4">Please log in to add a new comment!</h2>
-        <button
-          onClick={onClose}
-          className="mt-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        >
-          Close
-        </button>
+        <div className="flex justify-center">
+          <button
+            onClick={onClose}
+            className="mt-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );
