@@ -7,9 +7,7 @@ import Login from "../components/login";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-function GameDetailContent() {
-  const searchParams = useSearchParams();
-  const title = searchParams.get("title") || "";
+function GameDetailContent({ title }) {
   const titleStyle = "text-4xl font-bold text-center pt-5 pb-5";
 
   return (
@@ -31,9 +29,12 @@ function GameDetailContent() {
 }
 
 export default function GameDetailPage() {
+  const searchParams = useSearchParams();
+  const title = searchParams.get("title") || "";
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <GameDetailContent />
+      <GameDetailContent title={title} />
     </Suspense>
   );
 }
