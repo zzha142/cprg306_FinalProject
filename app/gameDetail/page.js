@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import GameDetail from "../components/GameDetail";
 import Comments from "../components/comments";
+import Login from "../components/login";
 
 function GameDetailContent() {
   const searchParams = useSearchParams();
