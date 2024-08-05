@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Login from "./components/login";
 import RandomFreeGame from "./components/random-free-game";
 import SearchBar from "./components/search-bar";
-import Link from "next/link";
-import GameDetailPage from "./gameDetail/page";
+import AllGames from "./components/AllGames";
 
 export default function HomePage() {
   return (
@@ -21,6 +19,9 @@ export default function HomePage() {
       </div>
       <div className="text-center pt-12 w-2/3 mx-auto">
         <RandomFreeGame />
+      </div>
+      <div className="text-center pt-12 w-2/3 mx-auto">
+        <AllGames />
       </div>
     </main>
   );
