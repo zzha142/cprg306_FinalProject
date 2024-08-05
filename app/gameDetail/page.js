@@ -1,4 +1,10 @@
+"use client";
+
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { Suspense } from "react";
+import GameDetail from "../components/GameDetail";
+import Comments from "../components/comments";
 
 function GameDetailContent() {
   const searchParams = useSearchParams();
