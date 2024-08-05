@@ -1,13 +1,9 @@
-"use client";
-import { Suspense } from "react";
-import Comments from "../components/comments";
-import Link from "next/link";
-import GameDetail from "../components/GameDetail";
-import Login from "../components/login";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-function GameDetailContent({ title }) {
+function GameDetailContent() {
+  const searchParams = useSearchParams();
+  const title = searchParams.get("title") || "";
   const titleStyle = "text-4xl font-bold text-center pt-5 pb-5";
 
   return (
@@ -29,12 +25,9 @@ function GameDetailContent({ title }) {
 }
 
 export default function GameDetailPage() {
-  const searchParams = useSearchParams();
-  const title = searchParams.get("title") || "";
-
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <GameDetailContent title={title} />
+      <GameDetailContent />
     </Suspense>
   );
 }
